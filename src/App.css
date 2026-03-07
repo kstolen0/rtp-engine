@@ -11,7 +11,7 @@ html {
   gap: 1rem;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
   .container {
     display: grid;
     gap: 1rem;
