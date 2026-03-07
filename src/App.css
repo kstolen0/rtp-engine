@@ -1,0 +1,69 @@
+html {
+  --honey-bronze: #f6ae2dff;
+  --charcoal-blue: #454955ff;
+  --lavender-mist: #f3eff5ff;
+  --lime-moss: #72b01dff;
+  --green: #3f7d20ff;
+}
+
+.container {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    display: grid;
+    gap: 1rem;
+  }
+}
+
+.reward {
+  border-radius: 3rem;
+  padding: 0.5rem;
+  aspect-ratio: 1/1;
+  width: 3ch;
+  line-height: 3ch;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1.5em;
+}
+
+.coins {
+  background-color: var(--honey-bronze);
+}
+
+.spins {
+  background-color: var(--lime-moss);
+}
+
+.none {
+  background-color: var(--charcoal-blue);
+}
+
+.chain {
+  margin: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2ch;
+  justify-content: flex-start;
+  max-width: 80ch;
+}
+
+.addOutcome {
+  display: grid;
+
+}
+
+.inputs {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.outcomeInfo {
+  margin-top: 2rem;
+  display: flex;
+  gap: 0.5rem;
+}
