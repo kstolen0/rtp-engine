@@ -13,6 +13,7 @@ export const useSimulator = () => {
 		let timer: number
 		console.log(`outcome length: ${outcomes.length}`)
 		console.log(`rewards length: ${rewards.length}`)
+		setIsRunning(false);
 
 		if (spins > 0 && isEnabled) {
 			setIsRunning(true)
@@ -29,13 +30,11 @@ export const useSimulator = () => {
 				distributeReward(outcome, dispatch)
 
 			}, 1000);
-		} else {
-			setIsRunning(false);
 		}
 
 		return () => { if (timer) clearTimeout(timer) }
 
-	}, [spins, outcomes.length, rewards.length])
+	}, [spins, outcomes.length, rewards[rewards.length - 1]?.id])
 
 	const clearRewards = () => {
 		setRewards([])
