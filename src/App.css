@@ -49,7 +49,6 @@ html {
   gap: 2ch;
   justify-content: flex-start;
   align-content: flex-start;
-  max-width: 40ch;
   height: 40ch;
 }
 
@@ -60,6 +59,8 @@ html {
 
 .outcomeMeta {
   display: grid;
+  gap: 0.1rem;
+  background: var(--charcoal-blue);
 }
 
 .inputs {
@@ -69,14 +70,20 @@ html {
   justify-content: space-evenly;
 }
 
+.outcomesReturns {
+  background-color: #242424;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1rem;
+}
+
 .outcomeInfo {
-  margin: 0.25rem 0.5rem;
+  background-color: #242424;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  background: var(--charcoal-blue);
   gap: 0.5rem;
 
 }
@@ -89,10 +96,26 @@ html {
 .wallet {
   display: flex;
   justify-content: space-evenly;
-  font-size: 2rem;
+  font-size: 1.2rem;
 
 }
 
 .dropdown {
   font-size: 1.1rem;
+}
+
+@media (prefers-color-scheme: light) {
+
+  .outcomeMeta {
+    display: grid;
+    background: var(--lavender-mist);
+  }
+
+  .outcomesReturns {
+    background-color: #ffffff;
+  }
+
+  .outcomeInfo {
+    background-color: #ffffff;
+  }
 }

@@ -5,16 +5,17 @@ export const OutcomeMeta = () => {
 
   const { outcomes } = useOutcomes();
 
-  const probabilitySum = outcomes.reduce((a, o) => a + o.probability, 0)
-  const coinReward = outcomes.filter(o => o.type === 'coins').reduce((a, o) => a + o.quantity * (o.probability / probabilitySum), 0)
+  const totalProbability = 100
 
-  const spinRTP = getRTP(outcomes, probabilitySum)
+  const spinRTP = getRTP(outcomes, totalProbability)
 
-  const ev = spinRTP < 1 ? getEV(outcomes, spinRTP, probabilitySum) : Number.POSITIVE_INFINITY;
+  const ev = spinRTP < 1 ? getEV(outcomes, spinRTP, totalProbability) : Number.POSITIVE_INFINITY;
 
   return (<div className="outcomeMeta">
-    RTP on spins is {spinRTP.toFixed(2)} <br />
-    EV is {ev.toFixed(2)} ({coinReward.toFixed(2)} / (1 - RTP))
+    <div className="outcomesReturns">
+      <span>RTP on spins is <strong>{spinRTP.toFixed(2)}</strong></span>
+      <span>EV is <strong>{ev.toFixed(2)}</strong> </span>
+    </div>
     {outcomes.map(o => (<OutcomeInfo key={o.id} outcome={o} />))}
   </div>)
 }
