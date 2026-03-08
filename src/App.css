@@ -21,8 +21,8 @@ html {
 .reward {
   border-radius: 3rem;
   padding: 0.5rem;
-  aspect-ratio: 1/1;
   width: 3ch;
+  height: 3ch;
   line-height: 3ch;
   text-align: center;
   color: white;
@@ -48,7 +48,9 @@ html {
   flex-wrap: wrap;
   gap: 2ch;
   justify-content: flex-start;
-  max-width: 80ch;
+  align-content: flex-start;
+  max-width: 40ch;
+  height: 40ch;
 }
 
 .addOutcome {
