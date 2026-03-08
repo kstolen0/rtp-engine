@@ -3,15 +3,19 @@ import { useOutcomeDispatch, useOutcomes, type Actions } from "../context/provid
 import type { Outcome } from "../context/types";
 
 export const useSimulator = () => {
-	const [toggle, setToggle] = useState(false)
 	const [rewards, setRewards] = useState<Outcome[]>([])
-	const { outcomes, spins } = useOutcomes();
+	const { outcomes, spins, isEnabled } = useOutcomes();
+	const [isRunning, setIsRunning] = useState(false);
 	const dispatch = useOutcomeDispatch();
 	const totalProbability = useMemo(() => outcomes.reduce((a, o) => a + o.probability, 0), [outcomes.length])
 
 	useEffect(() => {
 		let timer: number
-		if (toggle && spins > 0 && outcomes.length > 0) {
+		console.log(`outcome length: ${outcomes.length}`)
+		console.log(`rewards length: ${rewards.length}`)
+
+		if (spins > 0 && isEnabled) {
+			setIsRunning(true)
 			timer = setTimeout(() => {
 				dispatch({ type: 'useSpin' })
 				const outcome = generateOutcome(outcomes, totalProbability)
@@ -25,11 +29,13 @@ export const useSimulator = () => {
 				distributeReward(outcome, dispatch)
 
 			}, 1000);
+		} else {
+			setIsRunning(false);
 		}
 
 		return () => { if (timer) clearTimeout(timer) }
 
-	}, [spins, toggle, outcomes.length, rewards.length])
+	}, [spins, outcomes.length, rewards.length])
 
 	const clearRewards = () => {
 		setRewards([])
@@ -37,21 +43,22 @@ export const useSimulator = () => {
 
 
 	return {
-		toggle,
-		setToggle,
 		rewards,
 		clearRewards,
+		isRunning
 	}
 
 }
 
 const generateOutcome = (outcomes: Outcome[], totalProbability: number) => {
-	let result = Math.floor(Math.random() * totalProbability) + 1;
+	const result = Math.floor(Math.random() * totalProbability) + 1;
+	let resultMutation = result
+
 	const outcome = outcomes.find(o => {
-		if (result <= o.probability) {
+		if (resultMutation <= o.probability) {
 			return true
 		}
-		result -= o.probability
+		resultMutation -= o.probability
 		return false
 	})
 

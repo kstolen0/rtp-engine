@@ -3,17 +3,22 @@ import type { Outcome } from "./context/types"
 import { useSimulator } from "./hooks/useSimulator"
 
 export const Simulator = () => {
-  const { toggle, setToggle, rewards, clearRewards } = useSimulator()
-  const { coins, spins } = useOutcomes();
+  const { rewards, clearRewards, isRunning } = useSimulator()
+  const { coins, spins, isEnabled } = useOutcomes();
   const dispatch = useOutcomeDispatch()
 
+  const onBuySpin = () => {
+    dispatch({ type: 'buySpin' })
+    clearRewards()
+  }
+
   return (
-    <div>
-      current coins: {coins} <br />
-      current spins: {spins} <br />
-      <input type="button" onClick={() => setToggle(t => !t)} value={toggle ? 'stop' : 'start'} />
-      <input type="button" onClick={() => dispatch({ type: 'buySpin' })} value={'buy spin'} disabled={coins < 1} />
-      <input type='button' onClick={clearRewards} value={'CLEAR PRIZES'} />
+    <div className="simulator">
+      <div className="wallet">
+        <span>current coins: {coins}</span>
+        <span>current spins: {spins}</span>
+      </div>
+      <input type="button" onClick={onBuySpin} value={'buy spin'} disabled={coins < 1 || isRunning || !isEnabled} />
       <div className="chain">
         {rewards.slice().reverse().map((r) => (
           <Reward {...r} key={r.id} />

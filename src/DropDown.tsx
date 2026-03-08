@@ -4,13 +4,13 @@ export const DropDown = <T extends string>({ value, onChange, label, options }: 
   return (
     <label>
       {label}<br />
-      <select value={value.toString()} onChange={e => onChange(e.target.value as T)}>
+      <select className='dropdown' value={value.toString()} onChange={e => onChange(e.target.value as T)}>
         {options.map(o => (
           <option key={o} value={o}>
             {o}
           </option>
         ))}
       </select>
-    </label>)
+    </label >)
 
 }

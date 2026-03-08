@@ -12,14 +12,14 @@ export const OutcomeMeta = () => {
 
   const ev = spinRTP < 1 ? getEV(outcomes, spinRTP, probabilitySum) : Number.POSITIVE_INFINITY;
 
-  return (<div>
+  return (<div className="outcomeMeta">
     RTP on spins is {spinRTP.toFixed(2)} <br />
     EV is {ev.toFixed(2)} ({coinReward.toFixed(2)} / (1 - RTP))
-    {outcomes.map(o => (<OutcomeInfo key={o.id} outcome={o} totalProbability={probabilitySum} />))}
+    {outcomes.map(o => (<OutcomeInfo key={o.id} outcome={o} />))}
   </div>)
 }
 
-const OutcomeInfo = ({ outcome, totalProbability }: { outcome: Outcome, totalProbability: number }) => {
+const OutcomeInfo = ({ outcome }: { outcome: Outcome }) => {
 
   const dispatch = useOutcomeDispatch();
 
@@ -29,8 +29,8 @@ const OutcomeInfo = ({ outcome, totalProbability }: { outcome: Outcome, totalPro
 
   return (
     <div className="outcomeInfo">
-      <span>{outcome.artwork}</span>
-      <span>probability: {outcome.probability} ({(outcome.probability / totalProbability * 100).toPrecision(4)}%)</span>
+      <span className={`reward ${outcome.type}`}>{outcome.artwork}</span>
+      <span>probability: {outcome.probability}</span>
       <span>{outcome.type != 'none' && `quantity: ${outcome.quantity}`}</span>
       <input type="button" value='x' onClick={() => onSubmit(outcome.id)} />
     </div>)

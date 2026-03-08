@@ -3,8 +3,9 @@ import type { Outcome, OutcomeState, OutcomeType } from "./types";
 
 export const initialState: OutcomeState = {
 	outcomes: [],
-	coins: 0,
-	spins: 5,
+	coins: 5,
+	spins: 0,
+	isEnabled: false,
 }
 
 type AddPayload = {
@@ -64,16 +65,22 @@ export const OutcomeProvider = ({ children }: { children: React.ReactNode }) => 
 
 const reducer = (state: OutcomeState, action: Actions): OutcomeState => {
 	switch (action.type) {
-		case 'add':
+		case 'add': {
+			const newOutcomes = [...state.outcomes, toOutcome(action.payload)]
 			return {
 				...state,
-				outcomes: [...state.outcomes, toOutcome(action.payload)]
+				isEnabled: newOutcomes.reduce((a, o) => a + o.probability, 0) === 100,
+				outcomes: newOutcomes,
 			}
-		case 'remove':
+		}
+		case 'remove': {
+			const newOutcomes = state.outcomes.filter(o => o.id != action.id)
 			return {
 				...state,
-				outcomes: state.outcomes.filter(o => o.id != action.id)
+				isEnabled: newOutcomes.reduce((a, o) => a + o.probability, 0) === 100,
+				outcomes: newOutcomes
 			}
+		}
 		case 'addCoins':
 			return {
 				...state,

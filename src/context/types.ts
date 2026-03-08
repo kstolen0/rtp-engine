@@ -2,6 +2,7 @@ export type OutcomeState = {
 	outcomes: Outcome[];
 	coins: number;
 	spins: number;
+	isEnabled: boolean;
 }
 
 export type Outcome = Nothing | FreeSpins | Coins

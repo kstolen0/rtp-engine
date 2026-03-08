@@ -53,17 +53,44 @@ html {
 
 .addOutcome {
   display: grid;
+  margin: 1rem;
+}
 
+.outcomeMeta {
+  display: grid;
 }
 
 .inputs {
   display: flex;
   gap: 1rem;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 .outcomeInfo {
-  margin-top: 2rem;
+  margin: 0.25rem 0.5rem;
   display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  background: var(--charcoal-blue);
   gap: 0.5rem;
+
+}
+
+.simulator {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.wallet {
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 2rem;
+
+}
+
+.dropdown {
+  font-size: 1.1rem;
 }
